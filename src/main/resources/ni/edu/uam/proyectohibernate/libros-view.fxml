@@ -29,22 +29,25 @@
             <Label text="Precio:" GridPane.rowIndex="3" />
             <TextField fx:id="txtTitulo" promptText="Título del libro" GridPane.columnIndex="1" />
             <TextField fx:id="txtAutor" promptText="Autor del libro" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="txtAño" promptText="Año de publicación" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="txtAnio" promptText="Año de publicación" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField fx:id="txtPrecio" promptText="Precio del libro" GridPane.columnIndex="1" GridPane.rowIndex="3" />
          </children>
       </GridPane>
-      <HBox layoutX="29.0" layoutY="208.0" prefHeight="30.0" prefWidth="200.0" spacing="15.0">
+      <HBox layoutX="29.0" layoutY="209.0" prefHeight="30.0" prefWidth="524.0" spacing="15.0">
          <children>
             <Button fx:id="btnGuardar" mnemonicParsing="false" onAction="#guardarLibro" text="Guardar Libro" />
+            <Button fx:id="btnModificar" mnemonicParsing="false" onAction="#modificarLibro" text="Modificar libro" />
+            <Button fx:id="btnEliminar" mnemonicParsing="false" onAction="#eliminarLibro" text="Eliminar libro" />
             <Button fx:id="btnCargar" mnemonicParsing="false" onAction="#cargarLibros" text="Cargar Libros" />
+            <Button fx:id="btnLimpiar" mnemonicParsing="false" onAction="#limpiarFormulario" text="Limpiar campos" />
          </children>
       </HBox>
       <TableView fx:id="tblLibros" layoutX="29.0" layoutY="252.0" prefHeight="251.0" prefWidth="615.0">
         <columns>
-          <TableColumn fx:id="colID" prefWidth="51.0" text="ID" />
+          <TableColumn fx:id="colId" prefWidth="51.0" text="ID" />
           <TableColumn fx:id="colTitulo" prefWidth="171.0" text="Título" />
             <TableColumn fx:id="colAutor" prefWidth="181.0" text="Autor" />
-            <TableColumn fx:id="colAño" prefWidth="111.0" text="Año Publicación" />
+            <TableColumn fx:id="colAnio" prefWidth="111.0" text="Año Publicación" />
             <TableColumn fx:id="colPrecio" prefWidth="100.0" text="Precio" />
         </columns>
       </TableView>

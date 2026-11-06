@@ -23,6 +23,13 @@ public class Libro {
     @Column(name = "precio", nullable = false, precision = 12, scale = 2)
     private BigDecimal precio;
 
+    public Libro(String titulo, String autor, int anioPublicacion, BigDecimal precio) {
+        this.titulo = titulo;
+        this.autor = autor;
+        this.anioPublicacion = anioPublicacion;
+        this.precio = precio;
+    }
+
     public Libro() {
     }
 
