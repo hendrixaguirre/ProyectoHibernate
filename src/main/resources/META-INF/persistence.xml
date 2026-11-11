@@ -5,6 +5,8 @@
             org.hibernate.jpa.HibernatePersistenceProvider
         </provider>
         <class>ni.edu.uam.proyectohibernate.model.Libro</class>
+        <class>ni.edu.uam.proyectohibernate.model.Categoria</class>
+
         <properties>
             <!-- PostgreSQL -->
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
@@ -19,4 +21,3 @@
         </properties>
     </persistence-unit>
 </persistence>
-

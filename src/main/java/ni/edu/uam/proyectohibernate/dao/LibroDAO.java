@@ -3,11 +3,27 @@ package ni.edu.uam.proyectohibernate.dao;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import ni.edu.uam.proyectohibernate.database.JPAUtil;
+import ni.edu.uam.proyectohibernate.model.Categoria;
 import ni.edu.uam.proyectohibernate.model.Libro;
 
 import java.util.List;
 
 public class LibroDAO {
+
+    private Categoria obtenerCategoria(EntityManager em, Libro libro){
+
+        //validamos que el libro no sea null
+        if (libro.getCategoria()== null || libro.getCategoria().getId() == null){
+            throw new RuntimeException("Error al obtener categoría");
+        }
+        Long categoriaId = libro.getCategoria().getId();
+        Categoria categoria = em.find(Categoria.class, categoriaId);
+
+        if(categoria == null){
+            throw new RuntimeException("Error al obtener categoría");
+        }
+        return categoria;
+    }
 
     public void guardar(Libro libro){
         EntityManager em = JPAUtil.getEntityManager();
@@ -16,6 +32,9 @@ public class LibroDAO {
         try{
             //Iniciar la transacción en PostgreSQL
             tx.begin();
+
+            Categoria categoria = obtenerCategoria(em, libro);
+            libro.setCategoria(categoria);
             //Decirle a Hibernate que prepare la persistencia del objeto
             em.persist(libro);
             //Confirmar los cambios en la base de datos
@@ -33,7 +52,7 @@ public class LibroDAO {
     public List<Libro> listar(){
         EntityManager em = JPAUtil.getEntityManager();
         try{
-            return em.createQuery("SELECT l FROM Libro l ORDER BY l.id", Libro.class).getResultList();
+            return em.createQuery("SELECT l FROM Libro l JOIN FETCH l.categoria ORDER BY l.id", Libro.class).getResultList();
         }
         finally {
             em.close();
@@ -51,6 +70,10 @@ public class LibroDAO {
                 tx.rollback();
                 return false;
             }
+
+            Categoria categoria = obtenerCategoria(em, libro);
+            libroBD.setCategoria(categoria);
+
             libroBD.setTitulo(libro.getTitulo());
             libroBD.setAutor(libro.getAutor());
             libroBD.setAnioPublicacion(libro.getAnioPublicacion());
